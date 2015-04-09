@@ -1,0 +1,9 @@
+<% if @user %>
+	<% if @user.valid? %>
+		window.location.replace("<%= root_path %>");
+	<% else %>
+		$(".sign-up-error").html("<%= escape_javascript(render 'shared/error_messages') %>")
+	<% end %>
+<% else  %>
+	$(".sign-up-error").html("Username used or password doesn't match with confirmation!")
+<% end %>

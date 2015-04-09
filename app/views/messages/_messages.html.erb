@@ -1,0 +1,7 @@
+<ul>
+	<% @messages.each do |message| %>
+		<li>
+			<%= message.user.last_name + ':'+ message.body %>
+		</li>
+	<% end %>
+</ul>

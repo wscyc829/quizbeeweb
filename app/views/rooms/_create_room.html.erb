@@ -1,0 +1,4 @@
+<%= form_for :cr, url: create_room_path, autocomplete: :off, remote: true do |r| %>
+	<%= r.text_field :room_name, placeholder: "Create room" %>
+	<%= r.submit "Create room" %>
+<% end %>

@@ -1,0 +1,5 @@
+<% if logged_in? %>
+	window.location.replace("<%= root_path %>");
+<% else  %>
+	$("#smallerlogincontainer").html("<%= escape_javascript(render 'login') %>")
+<% end %>

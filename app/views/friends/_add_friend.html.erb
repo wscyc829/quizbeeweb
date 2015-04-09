@@ -1,0 +1,5 @@
+<%= form_for :af, url: add_friend_path, autocomplete: :off, remote: true do |f| %>
+	<%= f.text_field :first_name, placeholder: "Fisrt name" %>
+	<%= f.text_field :last_name, placeholder: "Last name" %>
+	<%= f.submit "Add friend" %>
+<% end %>

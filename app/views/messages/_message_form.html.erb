@@ -1,0 +1,4 @@
+<%= form_for :sm, url: send_message_path, remote: true do |q| %>
+	<%= q.text_field :body, placeholder: "Chat here" %>
+	<%= q.submit "Send" %>
+<% end %>

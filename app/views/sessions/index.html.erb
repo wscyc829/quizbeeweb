@@ -1,0 +1,10 @@
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<div id="loginheader"></div>
+<div id="loginpagecontainer" align="center">
+
+	<div id="smallerlogincontainer">
+	    <%= render 'login' %>
+	</div>
+</div>

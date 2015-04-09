@@ -1,0 +1,4 @@
+<%= form_for :pq, url: post_question_path, remote: true do |q| %>
+	<%= q.text_field :body, placeholder: "Enter the question" %>
+	<%= q.submit "Post question" %>
+<% end %>
