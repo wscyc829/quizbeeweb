@@ -1,6 +1,6 @@
 <% if @room %>
 	$("#roomlist-list").html("<%= escape_javascript(render 'rooms/room') %>")
 <% else %>
-	<% flash[:danger] = "Room exist."%>
+	<% flash[:danger] = "Room currently exists."%>
 <% end %>
 $("#create-room-form").html("<%= escape_javascript(render 'rooms/create_room') %>")

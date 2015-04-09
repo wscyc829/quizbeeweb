@@ -1,10 +1,10 @@
-<ul>
+<ul class="roomlist_ul">
 	<% @rooms.each do |r| %>
-		<li> 
-			<%= r.room_name %> 
+		<li class="roomlist_li">
+			<!-- <%= r.room_name %> -->
 			<%= form_for :sr, url: switch_room_path, remote: true do |s| %>
 				<%= s.hidden_field :room_id, :value => r.id %>
-				<%= s.submit "Switch room" %>
+				<%= s.submit r.room_name + " - " + r.owner.first_name + " " + r.owner.last_name, class: 'roombutton' %>
 			<% end %>
 		</li>
 	<% end %>

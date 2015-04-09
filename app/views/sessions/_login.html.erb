@@ -1,10 +1,25 @@
-<%= form_for :session, url: login_path, remote: true do |f| %>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-    <br>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <br>
-	<%= f.submit "Log in" %>
-<% end %>
-<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+<div id="loginheader">
+	<div id="loginpagecontainer" align="center">
+		<div id="smallerlogincontainer">
+
+			<%= form_for :session, url: login_path, remote: true do |f| %>
+			<div class="heading">
+				<%= f.label :username %>
+			</div>
+			<div>
+				<%= f.text_field :username, class: 'sometextbox' %>
+			</div>
+			<div class="heading">
+				<%= f.label :password %>
+			</div>
+			<div>
+				<%= f.password_field :password, class: 'sometextbox' %>
+			</div>
+			<div>
+				<%= f.submit "Log in", class: 'somebutton' %>
+			</div>
+			<% end %>
+			<%= button_to "Sign up", signup_path, class: 'somebutton', :method => :get %>
+		</div>
+	</div>
+</div>

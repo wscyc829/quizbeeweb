@@ -5,13 +5,12 @@
 
 			<ul>
 				<% question.comments.each do |comment|%>
-					<li> <%= comment.user.last_name + ':' + comment.body %></li>
-					<br>
-					Likes:<%= comment.likes.size %>
+					<li><%= comment.user.first_name + '\'s answer is: ' + comment.body %></li>
+						<%= comment.likes.size %>&nbsp;votes&nbsp;&ndash;
 					<% if Like.where(user_id: current_user.id, comment_id: comment.id).size == 0 %>
-						<%= link_to "Like", like_comment_path(:comment_id => comment.id), method: :post, remote: true %>
+						<%= link_to "Vote", like_comment_path(:comment_id => comment.id), method: :post, remote: true %>
 					<% else %>
-						<%= link_to "Unlike", unlike_comment_path(:comment_id => comment.id), method: :post, remote: true %>
+						<%= link_to "Unvote", unlike_comment_path(:comment_id => comment.id), method: :post, remote: true %>
 					<% end %>
 				<% end %>
 			</ul>

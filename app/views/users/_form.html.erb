@@ -1,26 +1,38 @@
-<%= form_for @user, remote: true do |f| %>
+<div id="loginheader">
+<div id="loginpagecontainer" align="center">
+<div id="smallerlogincontainer">
+
+	<%= form_for @user, remote: true do |f| %>
+	<table>
+		<tr>
+			<td><%= f.label :username, class: 'heading' %></td>
+			<td><%= f.text_field :username, class: 'sometextbox' %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :password, class: 'heading' %></td>
+			<td><%= f.password_field :password, class: 'sometextbox'%></td>
+		</tr>
+		<tr>
+			<td><%= f.label :password_confirmation, "Confirm Password", class: 'heading' %></td>
+			<td><%= f.password_field :password_confirmation, minlength: 3, class: 'sometextbox' %></td>
+		</tr>
+		<tr>
+			<td><%= f.label :first_name, class: 'heading' %></td>
+			<td><%= f.text_field :first_name, class: 'sometextbox'%></td>
+		</tr>
+		<tr>
+			<td><%= f.label :last_name, class: 'heading' %></td>
+			<td><%= f.text_field :last_name, class: 'sometextbox' %></td>
+		</tr>
+		<tr>
+			<td><%= f.submit "Sign up", class:'somebutton' %></td>
+	<% end %> <!-- form end --> <!-- I have to end it or else the button_to tag won't work. -->
+			<td><%= button_to "Cancel", login_path, class: 'somebutton', :method => :get %></td>
+		</tr>
+	</table>
 	
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-    <br>
-      		
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-	<br>
-      		
-    <%= f.label :password_confirmation, "Confirmation" %>
-    <%= f.password_field :password_confirmation, minlength: 3 %>
-    <br>
+	
 
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-    <br>
-
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-    <br>
-
-	<%= f.submit "Sign up" %>
-<% end %>
-
-<%= link_to "Cancel", login_path %>
+</div>
+</div>
+</div>

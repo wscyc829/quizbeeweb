@@ -1,0 +1,146 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* %%%%%%%%%%%%%%% MAINCONTAINER %%%%%%%%%%%%%%% */
+
+#maincontainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-top: 30px;
+	margin-left: 250px;
+	width: calc(100% - 450px);
+	height: calc(100% - 60px);
+	z-index: 5;
+	background-color: white;
+}
+
+#question_area {
+	width: 100%;
+	border-top: 1px solid black;
+}
+
+#post_question {
+	width: 100%;
+	border-top: 1px solid black;
+}
+
+#chat_area {
+	width: 100%;
+	border-top: 1px solid black;
+}
+
+#send_message {
+	width: 100%;
+	border-top: 1px solid black;
+}
+
+/* %%%%%%%%%%%%%%% LOGIN AND REGISTER %%%%%%%%%%%%%%% */
+
+@font-face {
+	font-family: Lemon;
+	src: url(<%= asset_path 'lemon.otf' %>);
+}
+
+@font-face {
+	font-family: Neoteric;
+	src: url(<%= asset_path 'neoteric.ttf' %>);
+}
+
+#loginheader {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #2980b9;
+}
+
+#loginpagecontainer {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#smallerlogincontainer {
+    margin-left: auto;
+    margin-right: auto; 
+    width: 25vw;
+}
+
+.heading {
+	font-family: Lemon;
+	color: white;
+	font-size: 30px;
+}
+
+.sometextbox {
+	height: 30px;
+	width: 200px;
+	border: none;
+	border-radius: 15px;
+	color: rgba(41, 128, 185, 1.0);
+	font-family: Neoteric;
+	font-size: 20px;
+	text-align: center;
+}
+
+.sometextbox:focus {
+	outline: none;
+}
+
+.somebutton {
+	height: 30px;
+	width: 200px;
+	border: none;
+	border-radius: 15px;
+	margin-top: 10px;
+	background-color: #f1c40f;
+
+	color: white;
+	font-family: 'Wolf in the City';
+	font-size: 30px;
+}
+
+.somebuttonred {
+	height: 30px;
+	width: 200px;
+	border: none;
+	border-radius: 15px;
+	margin-top: 10px;
+	background-color: #f1c40f;
+
+	color: red;
+	font-family: 'Wolf in the City';
+	font-size: 30px;
+}
+
+.somebutton:hover {
+	background-color: #f39c12;
+}
+
+.somebutton:active {
+	background-color: #f1c40f;
+}
+
+.somebutton:focus {
+	outline: none;
+}
+
+.somebutton > a {
+	text-decoration: none;
+	color: white;
+}

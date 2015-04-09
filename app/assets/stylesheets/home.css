@@ -1,0 +1,186 @@
+/* %%%%%%%%%%%%%%% HEADER %%%%%%%%%%%%%%% */
+
+header {
+	width: 100%;
+	height: 30px;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	background-color: rgba(41, 128, 185, 1.0);
+}
+
+header > span {
+	position: absolute;
+	top: 5px;
+	padding-left: 10px;
+	color: white;
+	font-family: 'Calibri';
+}
+
+header > form, .headerbutton {
+	width: 100px;
+	height: 100%;
+	float: right;
+	border: none;
+	color: white;
+	background-color: transparent;
+	font-family: 'Neoteric';
+}
+
+header > form:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+header > form:active {
+	background-color: transparent;
+}
+
+header > form:focus {
+	outline: none;
+}
+
+.somesection {
+	padding-top: 15px;
+	text-align: center;
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+	color: #f1c40f;
+	font-family: 'Lemon';
+	font-size: 30px;
+}
+
+/* %%%%%%%%%%%%%%% ROOM %%%%%%%%%%%%%%% */
+
+#roomlist {
+	position: absolute;
+	top: 30px;
+	left: 0;
+	width: 250px;
+	height: calc(100% - 30px);
+	z-index: 9;
+	background-color: rgba(236, 240, 241, 1.0);
+	overflow-y: auto;
+}
+
+#roomlist-list > ul {
+	color: #2c3e50;
+	padding-left: 0;
+	margin-top: 0;
+}
+
+#roomlist-list > ul > li {
+	list-style: none;
+	list-style-type: none;
+}
+
+.roombutton:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.roombutton:active {
+	background-color: rgba(0, 0, 0, 0.0);
+}
+
+.roombutton:focus {
+	outline: none;
+}
+
+#create-room-form, #add-friend-form {
+	width: 100%;
+}
+
+.create-room-tfield, .add-friend-tfield-fname, .add-friend-tfield-lname {
+	position: absolute;
+	left: 0;
+	bottom: 70px;
+	width: calc(100% - 4px);
+}
+
+.add-friend-tfield-fname {
+	bottom: 90px;
+}
+
+.create-room-button, .add-friend-button {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 70px;
+	border: 0;
+	background-color: #f39c12;
+	color: white;
+	font-family: 'Lemon';
+	font-size: 30px;
+}
+
+.create-room-button:hover, .add-friend-button:hover {
+	background-color: #f1c40f;
+}
+
+.roombutton {
+	width: 100%;
+	background: none;
+	border: none;
+	padding-left: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-family: 'Calibri';
+	font-size: 16px;
+	text-align: left;
+	color: #2c3e50;
+}
+
+#create-room-form {
+	position: absolute;
+	bottom: 0;
+}
+
+/* %%%%%%%%%%%%%%% FRIENDS %%%%%%%%%%%%%%% */
+
+#friendslist {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	margin-top: 0px;
+	width: 200px;
+	height: calc(100% - 30px);
+	z-index: 9;
+	background-color: rgba(236, 240, 241, 1.0);
+	overflow-y: auto;
+}
+
+#friendslist > ul {
+	color: #2c3e50;
+	padding-left: 0;
+	font-family: 'Calibri';
+	margin-top: 0;
+}
+
+#friendslist > ul > li {
+	list-style: none;
+	list-style-type: none;
+	padding-left: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#friendslist > ul > li:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+#friendslist > ul > li:active {
+	background-color: rgba(0, 0, 0, 0.0);
+}
+
+#add-friend-form {
+	position: absolute;
+	bottom: 0;
+}
+
+.add-friend-tfield {
+	width: calc(100% - 4px);
+}

@@ -1,7 +1,7 @@
 <% if entered? %>
 	<%= current_room.room_name %>
 	<!-- ask and answer question area-->
-	<div id='question_area' style="height:200px;width:200px;border:1px solid red;overflow-y: scroll;">
+	<div id='question_area'>
 		<%= render 'questions/questions' %>
 	</div>
 	<div id="post_question">
@@ -9,7 +9,7 @@
 	</div>
 
 	<!-- chat area-->
-	<div id="chat_area" style="height:200px;width:200px;border:1px solid red; overflow-y: scroll;">
+	<div id="chat_area">
 		<%= render 'messages/messages' %>
 	</div>
 	<div id="send_message">
