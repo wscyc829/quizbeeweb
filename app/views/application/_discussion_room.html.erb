@@ -1,7 +1,7 @@
 <% if entered? %>
-	<%= current_room.room_name %>
+	<div id="room-name-container"><%= current_room.room_name %></div>
 	<!-- ask and answer question area-->
-	<div id='question_area'>
+	<div id="question_area">
 		<%= render 'questions/questions' %>
 	</div>
 	<div id="post_question">
