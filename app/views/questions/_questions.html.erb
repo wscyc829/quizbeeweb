@@ -1,9 +1,10 @@
-<ul>
+<ul style="list-style: none; list-style-type: none; padding: 0; font-family: Calibri;">
 	<% @questions.each do |question| %>
+	<div class="question-container">
 		<li>
 			<%= question.body %>
 
-			<ul>
+			<ul style="list-style: none; list-style-type: none;">
 				<% question.comments.each do |comment|%>
 					<li><%= comment.user.first_name + '\'s answer is: ' + comment.body %></li>
 						<%= comment.likes.size %>&nbsp;votes&nbsp;&ndash;
@@ -17,8 +18,9 @@
 			<%= form_for :pc, url: post_comment_path, remote: true do |c| %>
 				<%= c.text_field :body, placeholder: "Enter the answer" %>
 				<%= c.hidden_field :question_id, :value => question.id %>
-				<%= c.submit "Post comment" %>
+				<%= c.submit "Post answer" %>
 			<% end %>
 		</li>
+	</div>
 	<% end %>
 </ul>

@@ -34,26 +34,69 @@
 	font-family: 'Lemon';
 	font-size: 30px;
 	color: #f1c40f;
+	border-bottom: 1px solid rgba(243, 156, 18,1.0);
 }
 
 #question_area {
 	width: 100%;
-	border-top: 1px solid black;
+	height: 40%;
+	background-color: rgba(236, 240, 241,0.5);
+	overflow-y: auto;
+	// border-top: 1px solid black;
+}
+
+.question-container {
+	width: auto;
+	background-color: #f1c40f;
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding: 5px;
+	margin-top: 10px;
+
 }
 
 #post_question {
 	width: 100%;
-	border-top: 1px solid black;
+	// border-top: 1px solid black;
+}
+
+.post-question-tfield {
+	width: calc(100% - 2px);
+	border: 1px solid gray;
+	height: 50px;
+	font-family: 'Lemon';
+	color: #f1c40f;
+	text-align: center;
+	font-size: 36px;
+	background-color: rgba(236, 240, 241,0.8);
+}
+
+.post-question-tfield:focus {
+	outline: none;
 }
 
 #chat_area {
+	font-family: Calibri;
+	border-top: 1px solid rgba(243, 156, 18,1.0);
 	width: 100%;
-	border-top: 1px solid black;
+	height: calc(41% - 2px);
+	background-color: rgba(236, 240, 241,0.5);
+	overflow-y: auto;
+	// border-top: 1px solid black;
+}
+
+.message-box {
+	width: auto;
+	background-color: #5fff49;
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding: 5px;
+	margin-top: 10px;
 }
 
 #send_message {
 	width: 100%;
-	border-top: 1px solid black;
+	// border-top: 1px solid black;
 }
 
 /* %%%%%%%%%%%%%%% LOGIN AND REGISTER %%%%%%%%%%%%%%% */
