@@ -1,6 +1,8 @@
 <% if @friend %>
-	$("#friendlist-list").html("<%= escape_javascript(render 'friends/friend') %>")
+	$("#friendlist-list").html("<%= escape_javascript(render 'friends/friends') %>")
+	$("#roomlist-list").html("<%= escape_javascript(render 'rooms/rooms') %>")
 <% else %>
-	<% flash[:danger] = "Friend exist."%>
+	<% flash[:danger] = "Friend doesn't exist."%>
 <% end %>
-$("#add-friend-form").html("<%= escape_javascript(render 'friends/add_friend') %>")
+
+$("#add-friend-form").html("<%= j render 'friends/add_friend' %>")

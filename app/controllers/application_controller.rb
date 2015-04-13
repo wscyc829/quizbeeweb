@@ -27,34 +27,45 @@ class ApplicationController < ActionController::Base
     @room = current_user.rooms.create!(room_name: params[:cr][:room_name])
     
     update
+    PrivatePub.publish_to "/quizbee/create_room", :user => current_user, :rooms => current_user.rooms
   end
 
   def add_friend
     f = User.where(first_name: params[:af][:first_name],
                           last_name: params[:af][:last_name]).to_a.first
-    @friend = current_user.friendships.create(friend_id: f.id)
-    
-    update
+    if f.id != current_user.id
+      @friend = current_user.friendships.create(friend_id: f.id)
+      
+      update
+
+      PrivatePub.publish_to "/quizbee/add_friend", :user => current_user, :friend => f, :rooms => current_user.rooms
+    end
   end
 
   def post_question
     body = params[:pq][:body]
-    Question.create(user_id: current_user.id, room_id: current_room.id, body: body)
+    question = Question.create(user_id: current_user.id, room_id: current_room.id, body: body)
     @questions = current_room.questions
+
+    PrivatePub.publish_to "/quizbee/post_question", :question => question, :user => current_user, :room => current_room
   end
 
   def post_comment
     body = params[:pc][:body]
     question = Question.find_by(id: params[:pc][:question_id])
-    Comment.create(user_id: current_user.id, question_id: question.id, body: body)
+    comment = Comment.create(user_id: current_user.id, question_id: question.id, body: body)
     @questions = current_room.questions
+
+    PrivatePub.publish_to "/quizbee/post_comment", :question => question, :comment => comment,
+      :user => current_user, :room => current_room
   end
   
   def send_message
     body = params[:sm][:body]
-    Message.create(user_id: current_user.id, room_id: current_room.id, body: body)
+    message = Message.create(user_id: current_user.id, room_id: current_room.id, body: body)
     @messages = current_room.messages
 
+    PrivatePub.publish_to "/quizbee/send_message", :message => message, :user => current_user, :room => current_room
   end
 
   def switch_room
@@ -64,24 +75,35 @@ class ApplicationController < ActionController::Base
   end
 
   def like_comment
-    comment_id = params[:comment_id]
-    Like.create(user_id: current_user.id, comment_id: comment_id)
+    question = Question.find_by(id: params[:question_id])
+    comment = Comment.find_by(id: params[:comment_id])
+
+    like = Like.create(user_id: current_user.id, comment_id: comment.id)
+
     @questions = current_room.questions
+
+    PrivatePub.publish_to "/quizbee/like_or_unlike_comment", :question => question, :comment => comment, 
+    :likes => comment.likes.size, :user => current_user, :room => current_room
   end
 
   def unlike_comment
-    comment_id = params[:comment_id]
-    Like.find_by(user_id: current_user.id, comment_id: comment_id).destroy
+    question = Question.find_by(id: params[:question_id])
+    comment = Comment.find_by(id: params[:comment_id])
+
+    Like.find_by(user_id: current_user.id, comment_id: comment.id).delete
     
     @questions = current_room.questions
+
+     PrivatePub.publish_to "/quizbee/like_or_unlike_comment", :question => question, :comment => comment, 
+    :likes => comment.likes.size, :user => current_user, :room => current_room
   end
 
+  
   private
 
     def require_login
     	redirect_to login_path if session[:user_id].nil?
     end
-
     def update
       @rooms = current_user.rooms
 
@@ -103,5 +125,5 @@ class ApplicationController < ActionController::Base
         @questions = current_room.questions
         @messages = current_room.messages
       end
-  end
+    end
 end

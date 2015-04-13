@@ -1,28 +1,21 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+1. Install the gems first by type the rails command "bundle install"
 
-* Ruby version
+2. Create the database first by log in to the database and type "Create database QuizbeeWeb"
 
-* System dependencies
+3. If you are using vagrant, please do the following: 
+	- Add "config.vm.network :forwarded_port, guest: 9292, host: 9292" in your vagrantfile
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+	...
+	config.vm.network :forwarded_port, guest: 3000, host: 3000
+	config.vm.network :forwarded_port, guest: 9292, host: 9292
+	...
+	
+4. After running your server with rails command "rails s -b0.0.0.0", 
+	please run the webserver in another command window with 
+	rails command "rackup private_pub.ru -s thin -E production --host 0.0.0.0"
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

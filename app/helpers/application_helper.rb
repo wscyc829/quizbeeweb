@@ -16,4 +16,5 @@ module ApplicationHelper
   	session.delete(:room_id)
    	@current_room = nil
   end
+  
 end

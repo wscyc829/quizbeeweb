@@ -1,3 +1,32 @@
+<script type="text/javascript">
+	
+	PrivatePub.subscribe("/quizbee/create_room", function(data) {
+		<% if @room %>
+
+		<% end %>
+	});
+
+	PrivatePub.subscribe("/quizbee/add_friend", function(data) {
+		<% if @friend %>
+			if(<%= current_user.id %> == data.friend.id ){
+				var s = '<li>' + data.user.last_name + '</li>'
+				$('#friendlist-list').append(s);
+
+				for(var i=0;i<data.rooms.length;i++){
+					s = '<li class="roomlist_li">' + 
+						'<form action="/switch_room" accept-charset="UTF-8" data-remote="true" method="post">' + 
+						'<input name="utf8" type="hidden" value="✓">'+
+						'<input value="'+data.rooms[i].id+'" type="hidden" name="sr[room_id]" id="sr_room_id">'+
+						'<input type="submit" name="commit" value="'+data.rooms[i].room_name +
+						' - '+ data.user.first_name+' '+ data.user.last_name+'" class="roombutton">'+
+						'</form> </li>' 
+					$('.roomlist_ul').append(s)
+				}
+			}
+		<% end %>
+	});
+
+</script>
 <% flash.each do |message_type, message| %>
   <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
@@ -9,7 +38,7 @@
 <div id="roomlist">
 	<div class="somesection">ROOMS</div>
 	<div id="roomlist-list">
-		<%= render 'rooms/room' %>
+		<%= render 'rooms/rooms' %>
 	</div>
 	<div id="create-room-form">
 		<%= render 'rooms/create_room' %>
@@ -23,11 +52,12 @@
 <div id="friendslist">
 	<div class="somesection">FRIENDS</div>
 	<ul id="friendlist-list">
-		<%= render 'friends/friend' %>
+		<%= render 'friends/friends' %>
 	</ul>
 	<div id="add-friend-form">
 		<%= render 'friends/add_friend' %>
 	</div>
 </div>
 
-
+<%= subscribe_to "/quizbee/create_room" %>
+<%= subscribe_to "/quizbee/add_friend" %>

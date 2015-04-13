@@ -1,26 +1,26 @@
-<ul style="list-style: none; list-style-type: none; padding: 0; font-family: Calibri;">
+<ul id="questions-area" style="list-style: none; list-style-type: none; padding: 0; font-family: Calibri;">
 	<% @questions.each do |question| %>
-	<div class="question-container">
-		<li>
-			<%= question.body %>
-
-			<ul style="list-style: none; list-style-type: none;">
-				<% question.comments.each do |comment|%>
-					<li><%= comment.user.first_name + '\'s answer is: ' + comment.body %></li>
-						<%= comment.likes.size %>&nbsp;votes&nbsp;&ndash;
-					<% if Like.where(user_id: current_user.id, comment_id: comment.id).size == 0 %>
-						<%= link_to "Vote", like_comment_path(:comment_id => comment.id), method: :post, remote: true %>
-					<% else %>
-						<%= link_to "Unvote", unlike_comment_path(:comment_id => comment.id), method: :post, remote: true %>
+		<div class="question-container <%= question.id%>">
+			<li><%= question.body %>
+				<ul class="comment-area <%= question.id %>" style="list-style: none; list-style-type: none;">
+					<% question.comments.each do |comment|%>
+						<li><%= comment.user.first_name + '\'s answer is: ' + comment.body %></li>
+						<div class="comment <%= comment.id %> <%= question.id %>" >
+							<%= comment.likes.size %>&nbsp;votes&nbsp;&ndash;
+						</div>
+							<% if Like.where(user_id: session[:user_id], comment_id: comment.id).size == 0 %>
+								<%= link_to "Vote", like_comment_path(:question_id => question.id, :comment_id => comment.id), method: :post, remote: true %>
+							<% elsif Like.where(user_id: session[:user_id], comment_id: comment.id).size > 0 %>
+								<%= link_to "Unvote", unlike_comment_path(:question_id => question.id, :comment_id => comment.id), method: :post, remote: true %>
+							<% end %>
 					<% end %>
+				</ul>
+				<%= form_for :pc, url: post_comment_path, remote: true do |c| %>
+					<%= c.text_field :body, placeholder: "Enter the answer" %>
+					<%= c.hidden_field :question_id, :value => question.id %>
+					<%= c.submit "Post answer" %>
 				<% end %>
-			</ul>
-			<%= form_for :pc, url: post_comment_path, remote: true do |c| %>
-				<%= c.text_field :body, placeholder: "Enter the answer" %>
-				<%= c.hidden_field :question_id, :value => question.id %>
-				<%= c.submit "Post answer" %>
-			<% end %>
-		</li>
-	</div>
+			</li>
+		</div>
 	<% end %>
 </ul>

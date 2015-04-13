@@ -1,2 +1,2 @@
-$('#question_area').html("<%= escape_javascript(render 'questions/questions') %>")
-$('#post_question').html("<%= escape_javascript(render 'questions/question_form') %>");
+$('#question_area').html("<%= j render 'questions/questions' %>")
+$('#post_question').html("<%= j render 'questions/question_form' %>")

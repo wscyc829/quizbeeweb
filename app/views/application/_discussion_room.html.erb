@@ -1,3 +1,65 @@
+<script type="text/javascript">
+	PrivatePub.subscribe("/quizbee/post_question", function(data) {
+		<% if entered? %>
+			if(<%= current_room.id %> == data.room.id && <%= current_user.id %> != data.user.id ){
+				if($('.question-container.'+data.question.id).length == 0){
+					var s = '<div class="question-container '+ data.question.id+'">'+
+							'<li>' + data.question.body + 
+							'<ul class="comment-area ' + data.question.id +'" style="list-style: none; list-style-type: none;">' +
+							'</ul>' +
+							'<form action="/post_comment" accept-charset="UTF-8" data-remote="true" method="post">' +
+							'<input name="utf8" type="hidden" value="&#x2713;" />'+
+							'<input placeholder="Enter the answer" type="text" name="pc[body]" id="pc_body" />'+
+							'<input value="'+ data.question.id + '" type="hidden" name="pc[question_id]" id="pc_question_id" />'+ '<input type="submit" name="commit" value="Post answer" /></form>'+
+							'</li>' +
+						'</div>'
+					$('#questions-area').append(s)
+				}
+			}
+		<% end %>
+	});
+
+	PrivatePub.subscribe("/quizbee/post_comment", function(data) {
+		<% if entered? %>
+			if(<%= current_room.id %> == data.room.id && <%= current_user.id %> != data.user.id ){
+				if($('.comment.'+data.comment.id+'.'+data.question.id).length == 0){
+					var s = '<li>' + 
+							data.user.first_name + '\'s answer is: ' + data.comment.body +
+							'</li>' +
+							'<div class="comment ' + data.comment.id + ' ' + data.question.id + '" >' + 
+							'0 &nbsp;votes&nbsp;&ndash; <div>' +
+							'<a data-remote="true" rel="nofollow" data-method="post" href="/like_comment?comment_id='+
+								data.comment.id+'&amp;question_id='+data.question.id+'">Vote</a>'
+							
+					$('.comment-area.'+data.question.id).append(s)
+				}
+			}
+		<% end %>
+	});
+
+	PrivatePub.subscribe("/quizbee/like_or_unlike_comment", function(data) {
+		<% if entered? %>
+			if(<%= current_room.id %> == data.room.id && <%= current_user.id %> != data.user.id ){
+				var s = data.likes + '&nbsp;votes&nbsp;–'
+				$('.comment.'+data.question.id+'.'+data.comment.id).html(s)
+			}
+		<% end %>
+	});
+
+	PrivatePub.subscribe("/quizbee/send_message", function(data) {
+		<% if entered? %>
+			if(<%= current_room.id %> == data.room.id && <%= current_user.id %> != data.user.id ){
+				console.log('sending')
+				if($('.message-box.'+data.message.id).length == 0){
+					var s = '<div class="message-box '+data.message.id+'"> <span class="message-sender">' +
+							data.user.first_name + ' says:</span> <span class="message-body" style="display: flex">' + 
+							data.message.body +'</span> </div>'
+					$('#messages-area').append(s)
+				}
+			}
+		<% end %>
+	});
+</script>
 <% if entered? %>
 	<div id="room-name-container"><%= current_room.room_name %></div>
 	<!-- ask and answer question area-->
@@ -16,3 +78,8 @@
 		<%= render 'messages/message_form' %>
 	</div>
 <% end %>
+
+<%= subscribe_to "/quizbee/post_question" %>
+<%= subscribe_to "/quizbee/post_comment" %>
+<%= subscribe_to "/quizbee/like_or_unlike_comment" %>
+<%= subscribe_to "/quizbee/send_message" %>
