@@ -93,7 +93,7 @@ header > form:focus {
 	width: 100%;
 }
 
-.create-room-tfield, .add-friend-tfield-fname, .add-friend-tfield-lname {
+.create-room-tfield, .add-friend-tfield {
 	position: absolute;
 	left: 0;
 	bottom: 70px;

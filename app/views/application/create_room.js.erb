@@ -3,3 +3,5 @@
 <% else %>
 	<% flash[:danger] = "Room currently exists."%>
 <% end %>
+
+$("#create-room-form"").html("<%= j render 'rooms/create_room' %>")

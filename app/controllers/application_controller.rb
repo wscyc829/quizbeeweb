@@ -31,8 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def add_friend
-    f = User.where(first_name: params[:af][:first_name],
-                          last_name: params[:af][:last_name]).to_a.first
+    f = User.where(username: params[:af][:username]).to_a.first
     if f.id != current_user.id
       @friend = current_user.friendships.create(friend_id: f.id)
       
