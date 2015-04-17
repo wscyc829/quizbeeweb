@@ -27,11 +27,18 @@
 							data.user.first_name + '\'s answer is: ' + data.comment.body +
 							'</li>' +
 							'<div class="comment ' + data.comment.id + ' ' + data.question.id + '" >' + 
-							'0 &nbsp;votes&nbsp;&ndash; <div>' +
+							'0 &nbsp;votes&nbsp;&ndash; </div>' +
 							'<a data-remote="true" rel="nofollow" data-method="post" href="/like_comment?comment_id='+
 								data.comment.id+'&amp;question_id='+data.question.id+'">Vote</a>'
 							
 					$('.comment-area.'+data.question.id).append(s)
+
+					if($('.rank.'+data.user.id).length == 0){
+						s = '<li class="rank '+data.user.id+'">' +
+							data.user.last_name + ' : 0' +
+							'</li>'
+						$('#rankings_area').append(s)
+					}
 				}
 			}
 		<% end %>
@@ -42,6 +49,10 @@
 			if(<%= current_room.id %> == data.room.id && <%= current_user.id %> != data.user.id ){
 				var s = data.likes + '&nbsp;votes&nbsp;–'
 				$('.comment.'+data.question.id+'.'+data.comment.id).html(s)
+
+
+				s = data.owner.last_name + ' : ' + data.score
+				$('.rank.'+data.owner.id).html(s)
 			}
 		<% end %>
 	});
@@ -65,6 +76,10 @@
 	<!-- ask and answer question area-->
 	<div id="question_area">
 		<%= render 'questions/questions' %>
+	</div>
+
+	<div id="ranking_area" style="border:1px solid red;width:100px;height:100px;overflow-y:scroll;">
+		<%= render 'questions/rankings' %>
 	</div>
 	<div id="post_question">
 		<%= render 'questions/question_form' %>

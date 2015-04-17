@@ -55,6 +55,8 @@ class ApplicationController < ActionController::Base
     comment = Comment.create(user_id: current_user.id, question_id: question.id, body: body)
     @questions = current_room.questions
 
+    update
+    
     PrivatePub.publish_to "/quizbee/post_comment", :question => question, :comment => comment,
       :user => current_user, :room => current_room
   end
@@ -71,30 +73,42 @@ class ApplicationController < ActionController::Base
     session[:room_id] = params[:sr][:room_id]
     @questions = current_room.questions
     @messages = current_room.messages
+
+    update
   end
 
   def like_comment
     question = Question.find_by(id: params[:question_id])
     comment = Comment.find_by(id: params[:comment_id])
+    owner = comment.user;
 
     like = Like.create(user_id: current_user.id, comment_id: comment.id)
 
     @questions = current_room.questions
 
+    update
+
+    score = get_score(owner)
+
     PrivatePub.publish_to "/quizbee/like_or_unlike_comment", :question => question, :comment => comment, 
-    :likes => comment.likes.size, :user => current_user, :room => current_room
+    :likes => comment.likes.size, :owner => owner, :score => score, :user => current_user, :room => current_room
   end
 
   def unlike_comment
     question = Question.find_by(id: params[:question_id])
     comment = Comment.find_by(id: params[:comment_id])
+    owner = comment.user;
 
     Like.find_by(user_id: current_user.id, comment_id: comment.id).delete
     
     @questions = current_room.questions
 
-     PrivatePub.publish_to "/quizbee/like_or_unlike_comment", :question => question, :comment => comment, 
-    :likes => comment.likes.size, :user => current_user, :room => current_room
+    update
+
+    score = get_score(owner)
+
+    PrivatePub.publish_to "/quizbee/like_or_unlike_comment", :question => question, :comment => comment, 
+    :likes => comment.likes.size, :owner => owner, :score => score, :user => current_user, :room => current_room
   end
 
   
@@ -103,6 +117,7 @@ class ApplicationController < ActionController::Base
     def require_login
     	redirect_to login_path if session[:user_id].nil?
     end
+
     def update
       @rooms = current_user.rooms
 
@@ -123,6 +138,37 @@ class ApplicationController < ActionController::Base
       if entered?
         @questions = current_room.questions
         @messages = current_room.messages
+
+        comments = Array.new
+
+        @questions.each do |question|
+          comments += question.comments
+        end
+
+        @scores = []
+
+        comments.each do |comment|
+
+          found = false
+          @scores.each do |score|
+            if score[0].id == comment.user_id
+              found = true
+              score[1] += comment.likes.size
+            end
+          end
+
+          if !found
+            @scores.push([comment.user, comment.likes.size])
+          end
+        end
+      end
+    end
+
+    def get_score(user)
+      @scores.each do |score|
+        if score[0].id == user.id
+          return score[1]  
+        end
       end
     end
 end
