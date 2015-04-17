@@ -1,7 +1,8 @@
+<div class="somesection">Rankings</div>
 <ul id="rankings_area">
 	<% @scores.each do |score| %>
 		<li class="rank <%= score[0].id %>">
-			<%= score[0].last_name %>:<%= score[1]%>
+			<%= score[0].first_name %>:&nbsp;&nbsp;&nbsp;<%= score[1] %>
 		</li>
 	<% end %>
 	

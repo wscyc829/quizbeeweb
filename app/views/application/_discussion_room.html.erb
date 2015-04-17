@@ -27,7 +27,7 @@
 							data.user.first_name + '\'s answer is: ' + data.comment.body +
 							'</li>' +
 							'<div class="comment ' + data.comment.id + ' ' + data.question.id + '" >' + 
-							'0 &nbsp;votes&nbsp;&ndash; </div>' +
+							'0 &nbsp;votes&nbsp; </div>' +
 							'<a data-remote="true" rel="nofollow" data-method="post" href="/like_comment?comment_id='+
 								data.comment.id+'&amp;question_id='+data.question.id+'">Vote</a>'
 							
@@ -78,7 +78,7 @@
 		<%= render 'questions/questions' %>
 	</div>
 
-	<div id="ranking_area" style="border:1px solid red;width:100px;height:100px;overflow-y:scroll;">
+	<div id="ranking_area">
 		<%= render 'questions/rankings' %>
 	</div>
 	<div id="post_question">

@@ -38,11 +38,26 @@
 }
 
 #question_area {
-	width: 100%;
+	float: left;
+	width: 60%;
 	height: 40%;
 	background-color: rgba(236, 240, 241,0.5);
 	overflow-y: auto;
 	// border-top: 1px solid black;
+}
+
+#ranking_area {
+	float: right;
+	width: 40%;
+	height: 40%;
+	overflow-y: auto;
+	background-color: rgba(41, 128, 185, 1.0);
+}
+
+#rankings_area { /* <ul id="rankings_area"> */
+	color: white;
+	font-family: Calibri;
+	font-size: 18px;
 }
 
 .question-container {
@@ -52,7 +67,8 @@
 	border-radius: 10px;
 	padding: 5px;
 	margin-top: 10px;
-
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 #post_question {
@@ -144,7 +160,7 @@
 	border: none;
 	border-radius: 15px;
 	color: rgba(41, 128, 185, 1.0);
-	font-family: Neoteric;
+	font-family: Calibri;
 	font-size: 20px;
 	text-align: center;
 }
@@ -162,8 +178,9 @@
 	background-color: #f1c40f;
 
 	color: white;
-	font-family: 'Wolf in the City';
-	font-size: 30px;
+	font-family: Calibri;
+	font-style: italic;
+	font-size: 20px;
 }
 
 .somebuttonred {
