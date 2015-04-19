@@ -14,8 +14,14 @@ class SessionsController < ApplicationController
 	      # Log the user in and redirect to the user's show page.
 	      log_in user
 	    else
-	      # Create an error message.
-	      	flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
+	      @error = 0
+      	  if User.where(username: params[:session][:username]).to_a.size > 0
+          	#username exists but wrong password
+          	@error = 1
+          else
+          	#username not exists
+          	@error = 2
+   		  end
 	    end
 	end
 

@@ -1,4 +1,5 @@
 <%= form_for :af, url: add_friend_path, autocomplete: :off, remote: true do |f| %>
-	<%= f.text_field :username, placeholder: "Type your friend's username here", class: "add-friend-tfield" %>
+	<%= f.text_field :username, placeholder: "Type your friend's username here", 
+		class: "add-friend-tfield", :required => true %>
 	<%= f.submit "Add Friend", class: "add-friend-button" %>
 <% end %>

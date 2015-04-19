@@ -1,35 +1,38 @@
 <script type="text/javascript">
 	
 	PrivatePub.subscribe("/quizbee/create_room", function(data) {
-		<% if @room %>
-
-		<% end %>
+		if($('.friend.'+ data.user.id).length > 0){
+			s = '<li class="roomlist_li">' + 
+				'<form action="/switch_room" accept-charset="UTF-8" data-remote="true" method="post">' + 
+				'<input name="utf8" type="hidden" value="✓">'+
+				'<input value="'+data.room.id+'" type="hidden" name="sr[room_id]" id="sr_room_id">'+
+				'<input type="submit" name="commit" value="'+data.room.room_name +
+				' - '+ data.user.first_name+' '+ data.user.last_name+'" class="roombutton">'+
+				'</form> </li>' 
+			$('.roomlist_ul').append(s)
+		}
 	});
 
 	PrivatePub.subscribe("/quizbee/add_friend", function(data) {
-		<% if @friend %>
-			if(<%= current_user.id %> == data.friend.id ){
-				var s = '<li>' + data.user.last_name + '</li>'
-				$('#friendlist-list').append(s);
+		if(<%= current_user.id %> == data.friend.id ){
+			var s = '<li class="friend '+data.user.id+'">' + data.user.first_name + ' '+data.user.last_name + '</li>'
+			$('#friendlist-list').append(s);
 
-				for(var i=0;i<data.rooms.length;i++){
-					s = '<li class="roomlist_li">' + 
-						'<form action="/switch_room" accept-charset="UTF-8" data-remote="true" method="post">' + 
-						'<input name="utf8" type="hidden" value="✓">'+
-						'<input value="'+data.rooms[i].id+'" type="hidden" name="sr[room_id]" id="sr_room_id">'+
-						'<input type="submit" name="commit" value="'+data.rooms[i].room_name +
-						' - '+ data.user.first_name+' '+ data.user.last_name+'" class="roombutton">'+
-						'</form> </li>' 
-					$('.roomlist_ul').append(s)
-				}
+			for(var i=0;i<data.rooms.length;i++){
+				s = '<li class="roomlist_li">' + 
+					'<form action="/switch_room" accept-charset="UTF-8" data-remote="true" method="post">' + 
+					'<input name="utf8" type="hidden" value="✓">'+
+					'<input value="'+data.rooms[i].id+'" type="hidden" name="sr[room_id]" id="sr_room_id">'+
+					'<input type="submit" name="commit" value="'+data.rooms[i].room_name +
+					' - '+ data.user.first_name+' '+ data.user.last_name+'" class="roombutton">'+
+					'</form> </li>' 
+				$('.roomlist_ul').append(s)
 			}
-		<% end %>
+		}
 	});
 
 </script>
-<!--<% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type %>"><%= message %></div>
-<% end %> -->
+
 <header>
 	<span>Logged in as <%= current_user.first_name %></span>
 	<%= button_to "LOGOUT", logout_path, method: :delete, class: 'headerbutton' %>

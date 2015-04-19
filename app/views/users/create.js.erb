@@ -2,8 +2,18 @@
 	<% if @user.valid? %>
 		window.location.replace("<%= root_path %>");
 	<% else %>
-		$(".sign-up-error").html("<%= escape_javascript(render 'shared/error_messages') %>")
+		<% if @user.errors.any? %>
+			var s = '';
+		    <% @user.errors.full_messages.each do |msg| %>
+		      s += <%= msg %> + '\n'
+		    <% end %>
+		    alert(s);
+		<% end %>
 	<% end %>
-<% else  %>
-	$(".sign-up-error").html("Username used or password doesn't match with confirmation!")
+<% elsif @error == 1%>
+	alert("Username used!")
+<% elsif @error == 2%>
+	alert("Password doesn't match with confirmation!")
+<% else %>
+	alert('An error occured!')
 <% end %>

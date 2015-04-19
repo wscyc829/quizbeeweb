@@ -7,13 +7,13 @@
 				<%= f.label :username %>
 			</div>
 			<div>
-				<%= f.text_field :username, class: 'sometextbox' %>
+				<%= f.text_field :username, class: 'sometextbox', :required => true %>
 			</div>
 			<div class="heading">
 				<%= f.label :password %>
 			</div>
 			<div>
-				<%= f.password_field :password, class: 'sometextbox' %>
+				<%= f.password_field :password, class: 'sometextbox', :required => true %>
 			</div>
 			<div>
 				<%= f.submit "Login", class: 'somebutton' %>

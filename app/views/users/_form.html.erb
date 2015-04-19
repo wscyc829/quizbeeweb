@@ -6,23 +6,23 @@
 	<table>
 		<tr>
 			<td><%= f.label :username, class: 'heading' %></td>
-			<td><%= f.text_field :username, class: 'sometextbox' %></td>
+			<td><%= f.text_field :username, class: 'sometextbox', :required => true %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :password, class: 'heading' %></td>
-			<td><%= f.password_field :password, class: 'sometextbox'%></td>
+			<td><%= f.password_field :password, class: 'sometextbox', :required => true %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :password_confirmation, "Confirm Password", class: 'heading' %></td>
-			<td><%= f.password_field :password_confirmation, minlength: 3, class: 'sometextbox' %></td>
+			<td><%= f.password_field :password_confirmation, minlength: 3, class: 'sometextbox', :required => true %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :first_name, class: 'heading' %></td>
-			<td><%= f.text_field :first_name, class: 'sometextbox'%></td>
+			<td><%= f.text_field :first_name, class: 'sometextbox', :required => true %></td>
 		</tr>
 		<tr>
 			<td><%= f.label :last_name, class: 'heading' %></td>
-			<td><%= f.text_field :last_name, class: 'sometextbox' %></td>
+			<td><%= f.text_field :last_name, class: 'sometextbox', :required => true %></td>
 		</tr>
 		<tr>
 			<td><%= f.submit "Sign up", class:'somebutton' %></td>

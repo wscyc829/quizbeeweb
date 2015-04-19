@@ -1,4 +1,5 @@
 <%= form_for :cr, url: create_room_path, autocomplete: :off, remote: true do |r| %>
-	<%= r.text_field :room_name, placeholder: "Enter room title here", class: "create-room-tfield" %>
+	<%= r.text_field :room_name, placeholder: "Enter room title here", 
+		class: "create-room-tfield", :required => true %>
 	<%= r.submit "Create room", class: "create-room-button" %>
 <% end %>

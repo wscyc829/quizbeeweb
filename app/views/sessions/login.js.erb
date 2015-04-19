@@ -1,5 +1,12 @@
 <% if logged_in? %>
 	window.location.replace("<%= root_path %>");
 <% else  %>
+	<% if @error == 1 %>
+		alert('Wrong password!')
+	<% elsif @error == 2 %>
+		alert('Username not exist! Please register first!')
+	<% else %>
+		alert('An error occured!')
+	<% end %>
 	$("#smallerlogincontainer").html("<%= escape_javascript(render 'login') %>")
 <% end %>

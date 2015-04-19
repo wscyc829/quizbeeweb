@@ -1,8 +1,10 @@
 <% if @friend %>
 	$("#friendlist-list").html("<%= escape_javascript(render 'friends/friends') %>")
 	$("#roomlist-list").html("<%= escape_javascript(render 'rooms/rooms') %>")
+<% elsif @error == 1 %>
+	alert("Friend doesn't exist.")
 <% else %>
-	<% flash[:danger] = "Friend doesn't exist."%>
+	alert('An error occured!')
 <% end %>
 
 $("#add-friend-form").html("<%= j render 'friends/add_friend' %>")

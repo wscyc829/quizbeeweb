@@ -16,9 +16,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :first_name, :scope => [:last_name]
 
   def self.create_user(username, password, password_confirm, first_name, last_name)
-    return false if password != password_confirm
-    return false if User.where(username: username).to_a.size > 0
-
     salt = BCrypt::Engine.generate_salt
     hashed_password = BCrypt::Engine.hash_secret(
       password, salt)

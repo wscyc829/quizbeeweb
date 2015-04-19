@@ -24,20 +24,42 @@ class ApplicationController < ActionController::Base
 
   
   def create_room
-    @room = current_user.rooms.create!(room_name: params[:cr][:room_name])
-    
-    update
-    PrivatePub.publish_to "/quizbee/create_room", :user => current_user, :rooms => current_user.rooms
+    if Room.where(room_name: params[:cr][:room_name], owner_id: current_user.id).to_a.size > 0
+      @room = false 
+    else
+      @room = current_user.rooms.create!(room_name: params[:cr][:room_name])
+
+      update
+
+      if @room
+        if @room.valid?
+          PrivatePub.publish_to "/quizbee/create_room", :user => current_user, :room => @room
+        end
+      end
+    end
   end
 
   def add_friend
-    f = User.where(username: params[:af][:username]).to_a.first
-    if f.id != current_user.id
-      @friend = current_user.friendships.create(friend_id: f.id)
-      
-      update
+    f = User.where(username: params[:af][:username])
+    
+    @error = 0
 
-      PrivatePub.publish_to "/quizbee/add_friend", :user => current_user, :friend => f, :rooms => current_user.rooms
+    if f.to_a.size > 0
+      f = f.to_a.first
+      if f.id != current_user.id
+        @friend = current_user.friendships.create(friend_id: f.id)
+        
+        update
+
+        if @friend
+          if @friend.valid?
+            PrivatePub.publish_to "/quizbee/add_friend", :user => current_user, :friend => f, :rooms => current_user.rooms
+          end
+        end
+      end
+    else
+      @error = 1
+      @freind = false
     end
   end
 

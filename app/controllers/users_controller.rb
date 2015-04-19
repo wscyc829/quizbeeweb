@@ -9,10 +9,18 @@ class UsersController < ApplicationController
    	def create
    		p = user_params
 
-    	@user = User.create_user(p[:username], 
-    	p[:password], p[:password_confirmation],
-    	p[:first_name], p[:last_name])
- 		
+      @error = 0
+      @error = 1 if User.where(username: p[:username]).to_a.size > 0
+      @error = 2 if p[:password] != p[:password_confirmation]
+
+      if @error == 0
+      	@user = User.create_user(p[:username], 
+      	p[:password], p[:password_confirmation],
+      	p[:first_name], p[:last_name])
+      else
+        @user = false
+      end
+
   	end
 
   	private
